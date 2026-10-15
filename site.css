@@ -1,0 +1,117 @@
+/* Swimflake's support and privacy pages. One column, one left edge: every heading,
+   paragraph and the icon's box start on main's content edge. */
+
+@font-face {
+  font-family: "Handlee";
+  src: url("Handlee-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --paper: #FDFBF2;
+  --ink: #2C1B45;
+  --ink-soft: #6B5F7C;
+  --ink-faint: #9A90A8;
+  --rule: #D8D2C4;
+  --free: #86BBE6;
+  --hand: "Handlee", "Bradley Hand", cursive;
+  --body: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.55 var(--body);
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 24px 72px;
+}
+
+/* Top bar: the wordmark on the column's left edge, text links on its right. */
+.top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 56px; }
+.top nav { display: flex; gap: 22px; }
+.top nav a { font-weight: 650; font-size: 15px; text-decoration: none; color: var(--ink-soft); }
+.top nav a:hover { color: var(--ink); }
+.brand { text-decoration: none; color: var(--ink); }
+
+/* Wordmark: lowercase Handlee; the dot of the i is a swim ring (img/dot.png). The ring's
+   outline is centred where Handlee draws its own dot (0.098 em right of the ı's origin,
+   0.678 em above the baseline); with line-height 1 the baseline is 0.7665 em down. The
+   word is pulled back by its "s" bearing (0.025 em) so its ink sits on the edge. */
+.wordmark { font-family: var(--hand); font-size: 34px; line-height: 1; white-space: nowrap; letter-spacing: -0.01em; margin-left: -0.025em; }
+.wordmark .i { position: relative; display: inline-block; }
+.wordmark .i .dot {
+  position: absolute; width: 0.19em;
+  left: calc(0.098em - 0.45 * 0.19em);
+  top: calc(0.7665em - 0.678em - 0.45 * 0.19em);
+  transform: rotate(-8deg); transform-origin: 45% 45%;
+}
+
+/* The hero's two lines start on different letters, so each line carries its own bearing. */
+h1 .l { display: block; text-indent: calc(var(--lsb, 0) * -1em); }
+
+/* "Coming soon": a box you can see, so the box sits on the column edge. Its colour block
+   hangs off to the right and below, the app's one offset, so the left edge stays clean. */
+.pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin: 8px 0 0; padding: 9px 16px;
+  border: 2px solid var(--ink); border-radius: 999px;
+  background: var(--paper); box-shadow: 4px 4px 0 var(--free);
+  font-weight: 700; font-size: 15px; color: var(--ink);
+}
+.pill .pip { width: 9px; height: 9px; border-radius: 50%; background: var(--free); border: 1.5px solid var(--ink); }
+
+/* The art strip's ink starts at the image's left edge (rendered that way), so the image
+   box goes on the column. */
+.strip { display: block; width: 100%; height: auto; margin: 40px 0 8px; }
+
+/* Handlee's letters sit a little inside their boxes. Each heading carries its first
+   glyph's left side bearing (measured from the font, in em) as --lsb and its first
+   line is pulled back by exactly that, so the ink starts on the column edge, not the
+   box. The bearing belongs to one letter, so headings are kept to one line: a wrapped
+   second line would start on a different letter with a different bearing. */
+h1, h2 {
+  font-family: var(--hand);
+  font-weight: normal;
+  line-height: 1.15;
+  text-indent: calc(var(--lsb, 0) * -1em);
+}
+
+h1 { font-size: 48px; margin-top: 0; margin-bottom: 8px; }
+h2 { font-size: 30px; margin-top: 48px; margin-bottom: 8px; }
+
+h3 {
+  font-size: 17px;
+  font-weight: 650;
+  margin: 28px 0 4px;
+}
+
+p { margin: 0 0 14px; }
+
+.lede { color: var(--ink-soft); font-size: 19px; }
+
+.meta {
+  color: var(--ink-faint);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+a { color: var(--ink); text-decoration-color: var(--free); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+hr {
+  border: 0;
+  border-top: 1.5px solid var(--rule);
+  margin: 48px 0 20px;
+}
+
+footer p { color: var(--ink-soft); font-size: 15px; }
